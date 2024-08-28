@@ -1,0 +1,4 @@
+sonar_url;line
+https://codeanalyzer2.internal.ericsson.com/dashboard?id=com.ericsson.oss.adc%3Aeric-oss-5gpmevent-filetrans-proc&branch=1.92.0-15854600;18:40:09 [INFO] ANALYSIS SUCCESSFUL, you can browse https://codeanalyzer2.internal.ericsson.com/dashboard?id=com.ericsson.oss.adc%3Aeric-oss-5gpmevent-filetrans-proc&branch=1.92.0-15854600
+https://codeanalyzer2.internal.ericsson.com/dashboard?id=eric-oss-hello-world-go-app&branch=15675644;INFO: QUALITY GATE STATUS: PASSED - View details on https://codeanalyzer2.internal.ericsson.com/dashboard?id=eric-oss-hello-world-go-app&branch=15675644
+null;null

@@ -1,0 +1,26 @@
+/*******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ ******************************************************************************/
+div {
+  min-height: 39px;
+  max-height: 39px;
+  transition: none !important;
+  box-shadow: none !important;
+  border-width: 1px;
+  border-style: solid;
+  min-width: 88px;
+  max-width: 88px;
+  border-color: #424242;
+}

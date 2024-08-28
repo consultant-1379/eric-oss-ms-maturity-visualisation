@@ -1,0 +1,8 @@
+<mat-toolbar fxLayout="row wrap" fxLayoutAlign="start center">
+  <a *ngFor="let product of products$ | async "
+    [routerLink]="['/products', product.product]"
+    mat-raised-button
+    routerLinkActive="active-button">
+    {{product.product}} ({{product.totalJobs}})
+  </a>
+</mat-toolbar>

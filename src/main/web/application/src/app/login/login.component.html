@@ -1,0 +1,28 @@
+<div class="main" *ngIf="!(user$ | async)"> 
+    <div class="login">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="icon icon-cross">
+                <i class='icon icon-econ'></i>
+            </div>
+            <label for="chk" aria-hidden="true">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32">
+                    <title>econ</title>
+                    <path d="M23.072 20.296c1.424-0.478 2.282-0.388 3.010-0.030 0.722 0.364 1.306 0.996 1.586 1.824 0.274 0.83 0.192 1.688-0.172 2.41-0.364 0.72-1.002 1.304-2.428 1.782l-16.168 5.39c-1.426 0.476-2.284 0.386-3.012 0.030-0.72-0.364-1.304-0.996-1.586-1.824-0.274-0.83-0.19-1.688 0.174-2.41 0.362-0.722 0.994-1.306 2.426-1.782l16.17-5.39zM23.072 10.309c1.424-0.478 2.282-0.388 3.010-0.030 0.722 0.364 1.306 0.996 1.586 1.824 0.274 0.828 0.192 1.688-0.172 2.408-0.364 0.722-1.002 1.306-2.428 1.784l-16.168 5.39c-1.426 0.476-2.284 0.386-3.012 0.030-0.72-0.364-1.304-0.996-1.586-1.824-0.274-0.83-0.19-1.688 0.174-2.41 0.362-0.722 0.994-1.306 2.426-1.782l16.17-5.39zM23.072 0.329c1.424-0.478 2.282-0.388 3.010-0.030 0.722 0.364 1.306 0.996 1.586 1.824 0.274 0.828 0.192 1.688-0.172 2.408-0.364 0.722-1.002 1.306-2.428 1.784l-16.168 5.39c-1.426 0.476-2.284 0.386-3.012 0.030-0.72-0.364-1.304-0.996-1.586-1.824-0.274-0.83-0.19-1.688 0.174-2.412 0.362-0.72 0.994-1.304 2.426-1.78l16.17-5.39z" fill="white"></path>
+                </svg>
+            </label>
+           <input *ngFor="let control of fullForm"
+                [type]= 'control.type' 
+                [ngClass]="{'is-invalid': (f[control.formControlName].touched || formStatus.submitted) && f[control.formControlName].errors}"
+                [formControlName]= 'control.formControlName' 
+                [placeholder]= 'control.placeholder'
+             >
+           
+            <button [disabled]="formStatus.loading">Login</button>
+            <span *ngIf="formStatus.loading" class="loader">
+                <app-loader></app-loader>
+            </span>
+            <span *ngIf="formStatus.error" class="loader" style="color: red;">{{formStatus.errorMessage}}</span>
+        </form>
+    </div>
+</div>

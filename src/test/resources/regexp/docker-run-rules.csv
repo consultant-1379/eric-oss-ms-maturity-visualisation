@@ -1,0 +1,7 @@
+rule;line
+Bob Rule: clean;docker run --init --rm --workdir some-random-text --quiet clean
+Bob Rule: clean;+ docker run --rm --workdir some-random-text clean
+Bob Rule: lint:markdownlint lint:vale;+ docker run --rm --workdir some-random-text lint:vale
+Bob Rule: sonar-enterprise-pcr;[2023-10-13T14:56:02.313Z] + docker run --init --rm --workdir some-random-text --quiet sonar-enterprise-pcr
+Bob Rule: lint;[2023-10-10T09:34:14.294Z] + docker run --init --rm --workdir some-random-text lint
+null;null

@@ -1,0 +1,1521 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Micro Service Chassis</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>Micro Service Chassis</h1>
+    <div class="app-desc">Micro Service Chassis</div>
+    <div class="app-desc">More information: <a href="https://openapi-generator.tech">https://openapi-generator.tech</a></div>
+    <div class="app-desc">Contact Info: <a href="Team Quaranteam<a href="mailto:PDLDUNQUAR@pdl.internal.ericsson.com">PDLDUNQUAR@pdl.internal.ericsson.com</a>">Team Quaranteam<a href="mailto:PDLDUNQUAR@pdl.internal.ericsson.com">PDLDUNQUAR@pdl.internal.ericsson.com</a></a></div>
+    <div class="app-desc">Version: 0.0.1</div>
+    <div class="app-desc">BasePath:</div>
+    <div class="license-info">COPYRIGHT Ericsson 2021</div>
+    <div class="license-url">https://www.ericsson.com/en/legal</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Login">Login</a></h4>
+  <ul>
+  <li><a href="#getAllCount"><code><span class="http-method">get</span> /api/v1/all-count</code></a></li>
+  <li><a href="#getCount"><code><span class="http-method">get</span> /api/v1/count</code></a></li>
+  <li><a href="#userLogin"><code><span class="http-method">post</span> /api/v1/login</code></a></li>
+  </ul>
+  <h4><a href="#Report">Report</a></h4>
+  <ul>
+  <li><a href="#getProducts"><code><span class="http-method">get</span> /api/v1/products</code></a></li>
+  <li><a href="#getReport"><code><span class="http-method">get</span> /api/v1/products/{product}/report/{appType}/{type}</code></a></li>
+  <li><a href="#getReports"><code><span class="http-method">get</span> /api/v1/products/{product}/report</code></a></li>
+  </ul>
+
+  <h1><a name="Login">Login</a></h1>
+  <div class="method"><a name="getAllCount"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/all-count</code></pre></div>
+    <div class="method-summary">Get all count (<span class="nickname">getAllCount</span>)</div>
+    <div class="method-notes">Get all count</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#UserCountDto">UserCountDto</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "date" : "2000-01-23",
+  "count" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Not Found Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getCount"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/count</code></pre></div>
+    <div class="method-summary">Get count (<span class="nickname">getCount</span>)</div>
+    <div class="method-notes">Get count</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Long
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#Long">Long</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Not Found Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="userLogin"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /api/v1/login</code></pre></div>
+    <div class="method-summary">Authenticate the user (<span class="nickname">userLogin</span>)</div>
+    <div class="method-notes">Authenticate the user with LDAP active directory</div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">CredentialsDto <a href="#CredentialsDto">CredentialsDto</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#UserDto">UserDto</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "expiresAt" : 0,
+  "username" : "username",
+  "token" : "token"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#UserDto">UserDto</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Internal Server Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Report">Report</a></h1>
+  <div class="method"><a name="getProducts"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/products</code></pre></div>
+    <div class="method-summary">Get products list (<span class="nickname">getProducts</span>)</div>
+    <div class="method-notes">Get products list</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ProductResponseDto">ProductResponseDto</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "productWiseMetadata" : [ {
+    "metaData" : [ {
+      "totalJobs" : "totalJobs",
+      "section" : "section"
+    }, {
+      "totalJobs" : "totalJobs",
+      "section" : "section"
+    } ],
+    "product" : "product",
+    "totalJobs" : "totalJobs"
+  }, {
+    "metaData" : [ {
+      "totalJobs" : "totalJobs",
+      "section" : "section"
+    }, {
+      "totalJobs" : "totalJobs",
+      "section" : "section"
+    } ],
+    "product" : "product",
+    "totalJobs" : "totalJobs"
+  } ],
+  "jobNotification" : [ "jobNotification", "jobNotification" ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#ProductResponseDto">ProductResponseDto</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Internal Server Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getReport"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/products/{product}/report/{appType}/{type}</code></pre></div>
+    <div class="method-summary">Get jobs report for product (<span class="nickname">getReport</span>)</div>
+    <div class="method-notes">Get jobs report with last build</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">product (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; product default: null </div><div class="param">appType (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; appType default: null </div><div class="param">type (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; type default: null </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">pageNo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; pageNo default: null </div><div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; pageSize default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ReportsDto">ReportsDto</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "reports" : {
+    "mandatoryStages" : [ {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    }, {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    } ],
+    "maxUnknownStages" : 7,
+    "appType" : "appType",
+    "totalStagePercentage" : {
+      "key" : ""
+    },
+    "jobs" : [ {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    }, {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    } ],
+    "isStageAligned" : {
+      "key" : ""
+    },
+    "jobType" : "jobType"
+  },
+  "unknownJobNames" : [ "unknownJobNames", "unknownJobNames" ],
+  "nextSlice" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#ReportsDto">ReportsDto</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Internal Server Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getReports"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /api/v1/products/{product}/report</code></pre></div>
+    <div class="method-summary">Get jobs report for product (<span class="nickname">getReports</span>)</div>
+    <div class="method-notes">Get jobs report with last build</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">product (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; product default: null </div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">pageNo (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; pageNo default: null </div><div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; pageSize default: null </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ReportListDto">ReportListDto</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "reports" : [ {
+    "mandatoryStages" : [ {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    }, {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    } ],
+    "maxUnknownStages" : 7,
+    "appType" : "appType",
+    "totalStagePercentage" : {
+      "key" : ""
+    },
+    "jobs" : [ {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    }, {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    } ],
+    "isStageAligned" : {
+      "key" : ""
+    },
+    "jobType" : "jobType"
+  }, {
+    "mandatoryStages" : [ {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    }, {
+      "name" : "name",
+      "gatingEnabled" : true,
+      "rules" : [ "rules", "rules" ]
+    } ],
+    "maxUnknownStages" : 7,
+    "appType" : "appType",
+    "totalStagePercentage" : {
+      "key" : ""
+    },
+    "jobs" : [ {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    }, {
+      "jobName" : "jobName",
+      "currentCbosVersion" : true,
+      "buildStagePercentage" : "",
+      "mandatoryStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "sonarReportStatusCode" : 2,
+      "sonarQubeUrl" : "sonarQubeUrl",
+      "stageAlignedOrNot" : true,
+      "jobproductList" : [ "jobproductList", "jobproductList" ],
+      "sonarMetrics" : [ {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      }, {
+        "period" : {
+          "value" : "value"
+        },
+        "metric" : "metric",
+        "value" : "value"
+      } ],
+      "unknownStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "buildNo" : "buildNo",
+      "buildStatus" : "buildStatus",
+      "lastSuccessBuildTimestamp" : "",
+      "conditionalStages" : { },
+      "helmVersion" : "helmVersion",
+      "skippedStages" : [ {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      }, {
+        "coveredRules" : 0,
+        "stagePercentage" : "",
+        "mandatoryRulesCount" : 5,
+        "blueoceanStageInfo" : {
+          "durationInMillis" : 5,
+          "displayName" : "displayName"
+        },
+        "missingRules" : [ "missingRules", "missingRules" ],
+        "stageDiff" : 6,
+        "name" : "name",
+        "rules" : [ "rules", "rules" ],
+        "unknownRules" : 1
+      } ],
+      "lastSuccessBuildDuration" : "lastSuccessBuildDuration",
+      "buildUrl" : "buildUrl",
+      "jobUrl" : "jobUrl",
+      "cbosVersion" : "cbosVersion",
+      "sonarQualityGateStatus" : "sonarQualityGateStatus"
+    } ],
+    "isStageAligned" : {
+      "key" : ""
+    },
+    "jobType" : "jobType"
+  } ],
+  "unknownJobNames" : [ "unknownJobNames", "unknownJobNames" ],
+  "nextSlice" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    OK
+        <a href="#ReportListDto">ReportListDto</a>
+    <h4 class="field-label">404</h4>
+    Not Found
+        <a href="#"></a>
+    <h4 class="field-label">default</h4>
+    Internal Server Error
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#BlueoceanStageDto"><code>BlueoceanStageDto</code> - </a></li>
+    <li><a href="#ComponentDto"><code>ComponentDto</code> - </a></li>
+    <li><a href="#ConditionalExecStatus"><code>ConditionalExecStatus</code> - </a></li>
+    <li><a href="#CredentialsDto"><code>CredentialsDto</code> - </a></li>
+    <li><a href="#JobDto"><code>JobDto</code> - </a></li>
+    <li><a href="#MandatoryStageDto"><code>MandatoryStageDto</code> - </a></li>
+    <li><a href="#MetaData"><code>MetaData</code> - </a></li>
+    <li><a href="#MetricDto"><code>MetricDto</code> - </a></li>
+    <li><a href="#PeriodDto"><code>PeriodDto</code> - </a></li>
+    <li><a href="#ProductDto"><code>ProductDto</code> - </a></li>
+    <li><a href="#ProductResponseDto"><code>ProductResponseDto</code> - </a></li>
+    <li><a href="#ProductWiseMetadata"><code>ProductWiseMetadata</code> - </a></li>
+    <li><a href="#ReportDto"><code>ReportDto</code> - </a></li>
+    <li><a href="#ReportListDto"><code>ReportListDto</code> - </a></li>
+    <li><a href="#ReportsDto"><code>ReportsDto</code> - </a></li>
+    <li><a href="#StageDto"><code>StageDto</code> - </a></li>
+    <li><a href="#StageResult"><code>StageResult</code> - </a></li>
+    <li><a href="#StageState"><code>StageState</code> - </a></li>
+    <li><a href="#StageType"><code>StageType</code> - </a></li>
+    <li><a href="#UserCountDto"><code>UserCountDto</code> - </a></li>
+    <li><a href="#UserDto"><code>UserDto</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="BlueoceanStageDto"><code>BlueoceanStageDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">displayName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">durationInMillis (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageType">StageType</a></span>  </div>
+<div class="param">result (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageResult">StageResult</a></span>  </div>
+<div class="param">state (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageState">StageState</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ComponentDto"><code>ComponentDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">key (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">qualifier (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">measures (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricDto">set[MetricDto]</a></span>  </div>
+<div class="param">branch (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ConditionalExecStatus"><code>ConditionalExecStatus</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CredentialsDto"><code>CredentialsDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">password (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="JobDto"><code>JobDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">jobName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">jobUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">buildNo (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">buildUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">buildStatus (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">buildStagePercentage (optional)</div><div class="param-desc"><span class="param-type"><a href="#double">Double</a></span>  </div>
+<div class="param">stageAlignedOrNot (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">lastSuccessBuildDuration (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">helmVersion (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">lastSuccessBuildTimestamp (optional)</div><div class="param-desc"><span class="param-type"><a href="#timestamp">timestamp</a></span>  </div>
+<div class="param">currentCbosVersion (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">cbosVersion (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">jobproductList (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">mandatoryStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageDto">set[StageDto]</a></span>  </div>
+<div class="param">unknownStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageDto">set[StageDto]</a></span>  </div>
+<div class="param">skippedStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#StageDto">set[StageDto]</a></span>  </div>
+<div class="param">conditionalStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#ConditionalExecStatus">map[String, ConditionalExecStatus]</a></span>  </div>
+<div class="param">sonarMetrics (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetricDto">set[MetricDto]</a></span>  </div>
+<div class="param">sonarQubeUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">sonarQualityGateStatus (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">sonarReportStatusCode (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MandatoryStageDto"><code>MandatoryStageDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rules (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">set[String]</a></span>  </div>
+<div class="param">gatingEnabled (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetaData"><code>MetaData</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">section (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">totalJobs (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MetricDto"><code>MetricDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">metric (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">period (optional)</div><div class="param-desc"><span class="param-type"><a href="#PeriodDto">PeriodDto</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PeriodDto"><code>PeriodDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProductDto"><code>ProductDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">jobNotification (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">set[String]</a></span>  </div>
+<div class="param">JobsByEachProductMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">map[String, String]</a></span>  </div>
+<div class="param">appTypeByEachProductMap (optional)</div><div class="param-desc"><span class="param-type"><a href="#array">map[String, array[String]]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProductResponseDto"><code>ProductResponseDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">jobNotification (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">set[String]</a></span>  </div>
+<div class="param">productWiseMetadata (optional)</div><div class="param-desc"><span class="param-type"><a href="#ProductWiseMetadata">array[ProductWiseMetadata]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ProductWiseMetadata"><code>ProductWiseMetadata</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">product (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">totalJobs (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">metaData (optional)</div><div class="param-desc"><span class="param-type"><a href="#MetaData">array[MetaData]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ReportDto"><code>ReportDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">appType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">jobType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">mandatoryStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#MandatoryStageDto">array[MandatoryStageDto]</a></span>  </div>
+<div class="param">jobs (optional)</div><div class="param-desc"><span class="param-type"><a href="#JobDto">array[JobDto]</a></span>  </div>
+<div class="param">maxUnknownStages (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">isStageAligned (optional)</div><div class="param-desc"><span class="param-type"><a href="#Integer">map[String, Integer]</a></span>  </div>
+<div class="param">totalStagePercentage (optional)</div><div class="param-desc"><span class="param-type"><a href="#double">map[String, Double]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ReportListDto"><code>ReportListDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">unknownJobNames (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">reports (optional)</div><div class="param-desc"><span class="param-type"><a href="#ReportDto">array[ReportDto]</a></span>  </div>
+<div class="param">nextSlice (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ReportsDto"><code>ReportsDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">unknownJobNames (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">reports (optional)</div><div class="param-desc"><span class="param-type"><a href="#ReportDto">ReportDto</a></span>  </div>
+<div class="param">nextSlice (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="StageDto"><code>StageDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">rules (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">set[String]</a></span>  </div>
+<div class="param">missingRules (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">set[String]</a></span>  </div>
+<div class="param">coveredRules (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">stagePercentage (optional)</div><div class="param-desc"><span class="param-type"><a href="#double">Double</a></span>  </div>
+<div class="param">stageDiff (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">unknownRules (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">mandatoryRulesCount (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">blueoceanStageInfo (optional)</div><div class="param-desc"><span class="param-type"><a href="#BlueoceanStageDto">BlueoceanStageDto</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="StageResult"><code>StageResult</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="StageState"><code>StageState</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="StageType"><code>StageType</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserCountDto"><code>UserCountDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">date (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span>  format: date</div>
+<div class="param">count (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserDto"><code>UserDto</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">token (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">expiresAt (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

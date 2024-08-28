@@ -1,0 +1,36 @@
+/*******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ ******************************************************************************/
+.mat-card {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  min-width: 82px;
+  max-width: 82px;
+  height: 39px;
+  transition: none !important;
+  box-shadow: none !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #424242;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  background-color: #424242 !important;
+}
+mat-card-title {
+  font-size: smaller!important;
+}

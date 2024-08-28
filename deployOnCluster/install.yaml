@@ -1,0 +1,71 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+modelVersion: 2.0
+
+description: "Rules for deploying MS Maturity Tool"
+
+docker-images:
+  - helm: armdocker.rnd.ericsson.se/dockerhub-ericsson-remote/alpine/helm:3.5.4
+  - python: armdocker.rnd.ericsson.se/proj_openstack_tooling/python:3.9.4-alpine-curl
+  - kubectl: armdocker.rnd.ericsson.se/dockerhub-ericsson-remote/bitnami/kubectl:1.20.8
+  - adp-release-auto: armdocker.rnd.ericsson.se/proj-adp-cicd-drop/bob-adp-release-auto:latest
+
+properties:
+  - KUBECONFIG_GENERATION_API_ENDPOINT: https://macchiato.rnd.gic.ericsson.se/v3/clusters/c-rncz5?action=generateKubeconfig
+  - ARM: https://arm.seli.gic.ericsson.se/artifactory
+  - REPO: proj-eric-oss-drop-helm
+  - CLUSTER_NAME: hahn130
+  - CLUSTER_USER: hahn130
+  - CHART_YAML_PATH: https://gerrit-gamma.gic.ericsson.se/gitweb?p=OSS/com.ericsson.oss.ci/eric-oss-ms-maturity-visualisation.git;a=blob_plain;f=charts/eric-oss-ms-maturity-visualisation/values.yaml;hb=refs/heads/master
+  - CHART_LOCATION_IN_HELM_REPO: eric-oss-ms-maturity-visualisation
+  - NAMESPACE_TO_DEPLOY_TO: mrv
+  - JENKINS_SECRET_NAME: eric-oss-ms-maturity-visualisation
+  - CONTEXT_FOR_DEPLOY: maturity-context
+  - DOCKER_SERVER: armdocker.rnd.ericsson.se
+  - DOCKER_HUB_SECRET_NAME: docker-hub
+
+env:
+  - HELM_CHART_REPO_USER
+  - HELM_CHART_REPO_KEY
+  - KUBECONFIG
+  - PWD
+
+rules:
+  create-docker-hub-secret:
+    - task: create-docker-hub-secret
+      docker-image: kubectl
+      cmd: create secret docker-registry ${DOCKER_HUB_SECRET_NAME} --docker-username=${env.HELM_CHART_REPO_USER} --docker-password=${env.HELM_CHART_REPO_KEY} --docker-server=${DOCKER_SERVER} --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO}
+
+  create-jenkins-secret:
+    - task: get-jenkins-secret-output
+      docker-image: kubectl
+      cmd: --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO} create secret generic ${JENKINS_SECRET_NAME} --save-config --dry-run=client --from-literal=jenkins-username=${env.HELM_CHART_REPO_USER} --from-literal=jenkins-token=${env.HELM_CHART_REPO_KEY} -o yaml > jenkins-secret.yaml
+    - task: apply-jenkins-secret-file
+      docker-image: kubectl
+      cmd: apply -f jenkins-secret.yaml --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO}
+
+  run-helm-upgrade:
+    - task: add-rpt-helm-repo-and-run-install
+      docker-image: adp-release-auto
+      cmd:
+        - /bin/sh -c \
+          'helm repo add ${REPO} "${ARM}/${REPO}" --username ${env.HELM_CHART_REPO_USER} --password ${env.HELM_CHART_REPO_KEY}; helm repo update; helm install ${REPO}/${CHART_LOCATION_IN_HELM_REPO} --devel --generate-name --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO} --set global.pullSecret=${DOCKER_HUB_SECRET_NAME}'
+
+  setup-ingress:
+    - task: create-context
+      docker-image: kubectl
+      cmd: apply -f deployOnCluster/mrv-ingress.yaml --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO}

@@ -1,0 +1,37 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+description: Report Products Contract test
+name: Report Products contract test
+priority: 8
+request:
+  method: GET
+  urlPath: api/v1/products
+  headers:
+    Content-Type: application/json
+response:
+  status: 200
+---
+description: Report Contract test
+name: Report contract test
+priority: 8
+request:
+  method: GET
+  urlPath: /api/v1/products/OSS/report/java/PUBLISH?pageNo=0&pageSize=1
+  headers:
+    Content-Type: application/json
+response:
+  status: 200

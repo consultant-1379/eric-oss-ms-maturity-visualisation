@@ -1,0 +1,283 @@
+/*******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ ******************************************************************************/
+ .mat-table {
+  display: table;
+  overflow: auto;
+  padding-bottom: 20px;
+  line-height: normal;
+}
+
+mat-row {
+  border-style: none;
+  min-height: 0px;
+}
+
+
+mat-header-row {
+  min-height: 55px;
+  max-height: 55px;
+  margin-bottom: 2px;
+}
+
+mat-cell {
+  width: 90px;
+  max-height: 50px;
+  min-height: 50px;
+  margin: 2px;
+  flex: unset;
+  padding-left: 2px;
+  padding-right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+}
+
+.sonar-cell{
+  width: 150px;
+}
+
+mat-header-cell {
+  width: 90px;
+  flex: unset;
+  align-items: center;
+  text-align: center;
+  padding: 0 3px;
+}
+
+mat-cell:nth-child(4){
+  white-space: nowrap;
+  width: 110px;
+  margin-right: 10px;
+}
+
+mat-cell:first-child,
+mat-footer-cell:first-child,
+mat-header-cell:first-child {
+  padding-left: 1px !important;
+  width: 235px!important;
+  justify-content: flex-start;
+}
+
+mat-footer-cell:first-child {
+  padding-left: 1px !important;
+  width: 235px!important;
+  justify-content: flex-start;
+}
+
+mat-header-cell:nth-child(6){
+  width: 150px;
+}
+mat-header-cell:nth-child(4){
+  width: 120px;
+}
+
+mat-cell:last-child,
+mat-header-cell:last-child {
+  padding-right: unset!important;
+}
+
+mat-cell:first-child ,
+mat-header-cell:first-child {
+  position:sticky;
+  left:0;
+  z-index:1;
+}
+
+mat-header-cell {
+  overflow-wrap: anywhere;
+  padding: 0 4px;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  background-color: unset;
+}
+
+.mat-column-column-spacer {
+  display: -webkit-box;
+  display: flex;
+  flex: 0 0 0px;
+  padding: 0;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.mat-row .mat-column-column-spacer {
+  border-left-style: solid;
+  border-right-style: solid;
+  border-width: 1px;
+  background: #505050;
+  border-color: #3c3c3c;
+  min-width: 10px;
+}
+
+.mat-header-row .mat-column-column-spacer {
+  min-width: 12px;
+}
+
+mat-cell.header-spacer, mat-cell.first-header-spacer {
+  max-height: 5px;
+  min-height: 5px;
+}
+
+.header-spacer.mat-column-column-spacer {
+  min-height: 11px;
+}
+
+.sub-stage-spacer.sub-stage-spacer-start {
+  display: -webkit-box;
+  display: flex;
+  flex: 0 0 0px;
+  padding: 0;
+  margin: 0;
+}
+
+.header-spacer.parent-stage::after {
+  display: block;
+  content: '';
+  position: relative;
+  width: 85px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #cecece;
+  margin-left: 40px;
+  height: 2px;
+}
+
+.sub-stage-spacer.sub-stage-spacer-end {
+  border-left-width: 1px;
+  border-left-style: dashed;
+  border-left-color: #cecece;
+  width: 0px;
+  margin-left: 2px;
+}
+
+.header-spacer.sub-stage-spacer.sub-stage-spacer-end {
+  max-height: 3px;
+  min-height: 3px;
+  margin-top: 2px;
+}
+
+.header-spacer.sub-stage::after {
+  content: '\25ef';
+  position: relative;
+  margin-top: 1px;
+  margin-left: 42px;
+  background-color: #303030;
+  padding-left: 40px;
+  font-size: 7px;
+  color: #cecece;
+}
+
+mat-header-cell.sub-stage-spacer.sub-stage-spacer-end {
+  border: none;
+}
+
+.header-spacer.sub-stage, .header-spacer.sub-stage-spacer-start {
+  margin-top: 1px;
+  border-top-width: 1px;
+  border-top-style: dashed;
+  border-top-color: #cecece;
+  max-height: 0px;
+  min-height: 0px;
+  overflow: visible;
+}
+
+.expand-icon {
+  font-size: 18px;
+}
+
+.filter-help-icon {
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+.filter-form-field {
+  background-color: #303030
+}
+
+:host ::ng-deep .filter-form-field .mat-form-field-wrapper {
+    padding: 0;
+}
+
+.job-head {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+::ng-deep .mat-form-field-label {
+  font-size: 12px;
+  color: hsla(0,0%,100%,.7);
+  font-weight: 500;
+}
+
+::ng-deep .mat-input-element::placeholder {
+  color: #607d8b;
+}
+
+::ng-deep .filter-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-outline .mat-form-field-outline-start {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+::ng-deep .filter-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-outline .mat-form-field-outline-gap {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+::ng-deep .filter-form-field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-outline .mat-form-field-outline-end {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+.mat-expansion-panel {
+  overflow:unset !important;
+}
+
+.green {
+  color: #0fc373;
+  transform: scale(1.2);
+}
+
+.red {
+  color: #ff3232;
+  transform: scale(1.2);
+}
+
+.orange {
+  color: #ff8c0a;
+}
+
+.va-stage{
+  display: flex;
+  flex-direction: column;
+}
+
+.va-aligned{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.custom-stages{
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}

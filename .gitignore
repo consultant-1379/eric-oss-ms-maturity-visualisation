@@ -1,0 +1,23 @@
+/target/
+# IntelliJ #
+*.iml
+*.idea/
+*.idea/*
+
+/src/main/web/application/node_modules/
+/src/main/web/application/node_modules/*
+/src/main/web/application/.angular/cache/
+/src/main/web/application/dist/
+/src/main/web/application/node/
+/src/main/web/node/
+
+# Maven #
+*target/
+*pom.xml.tag
+*pom.xml.releaseBackup
+*pom.xml.versionsBackup
+*pom.xml.next
+*release.properties
+*dependency-reduced-pom.xml
+*buildNumber.properties
+*.mvn/timing.properties

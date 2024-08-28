@@ -1,0 +1,493 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+openapi: "3.0.2"
+info:
+  x-api-id: 0e2531e8-79a3-4796-b67f-8264fa103556
+  x-audience: external-public
+  description: "Micro Service Chassis"
+  version: "0.0.1"
+  title: "Micro Service Chassis"
+  license:
+    name: "COPYRIGHT Ericsson 2021"
+    url: "https://www.ericsson.com/en/legal"
+  termsOfService: "https://www.ericsson.com/en/legal"
+  contact:
+    email: "Team Quaranteam<PDLDUNQUAR@pdl.internal.ericsson.com>"
+paths:
+  /api/v1/login:
+    post:
+      tags:
+        - login
+      summary: Authenticate the user
+      description: Authenticate the user with LDAP active directory
+      operationId: userLogin
+      requestBody:
+       required: true
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/CredentialsDto'
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'      
+        "404":
+          description: "Not Found"
+        default:
+          description: "Internal Server Error"
+  /api/v1/count:
+    get:
+      tags:
+        - login
+      summary: Get count
+      description: Get count
+      operationId: getCount
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                 type: integer
+                 format: int64
+        "404":
+          description: "Not Found"
+        default:
+          description: "Not Found Error"
+  /api/v1/all-count:
+    get:
+      tags:
+        - login
+      summary: Get all count
+      description: Get all count
+      operationId: getAllCount
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCountDto'
+        "404":
+          description: "Not Found"
+        default:
+          description: "Not Found Error"
+  /api/v1/products/{product}/report:
+    get:
+      tags:
+        - report
+      summary: Get jobs report for product
+      description: Get jobs report with last build
+      operationId: getReports
+      parameters:
+        - in: path
+          name: product
+          schema:
+            type: string
+          required: true
+          description: product
+        - in: query
+          name: pageNo
+          description: pageNo
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: pageSize
+          description: pageSize
+          schema:
+            type: integer
+          required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportListDto'
+        "404":
+          description: "Not Found"
+        default:
+          description: "Internal Server Error"
+  /api/v1/products:
+    get:
+      tags:
+        - report
+      summary: Get products list
+      description: Get products list
+      operationId: getProducts
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponseDto'             
+        "404":
+          description: "Not Found"
+        default:
+          description: "Internal Server Error"
+  /api/v1/products/{product}/report/{appType}/{type}:
+    get:
+      tags:
+        - report
+      summary: Get jobs report for product
+      description: Get jobs report with last build
+      operationId: getReport
+      parameters:
+        - in: path
+          name: product
+          schema:
+            type: string
+          required: true
+          description: product
+        - in: path
+          name: appType
+          schema:
+            type: string
+          required: true
+          description: appType
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+          description: type
+        - in: query
+          name: pageNo
+          description: pageNo
+          schema:
+            type: integer
+          required: true  
+        - in: query
+          name: pageSize
+          description: pageSize
+          schema:
+            type: integer
+          required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportsDto'
+        "404":
+          description: "Not Found"
+        default:
+          description: "Internal Server Error"
+components:
+  schemas:
+    UserDto:
+      type: object
+      properties:
+        username:
+          type: string
+        token:
+          type: string
+        expiresAt:
+          type: integer
+          format: int64
+    CredentialsDto:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string  	      
+    ProductDto:
+      type: object
+      properties:
+        jobNotification:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        JobsByEachProductMap:
+          type: object
+          additionalProperties:
+            type: string
+        appTypeByEachProductMap:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string                     
+    ReportsDto:
+      type: object
+      properties:
+        unknownJobNames:
+          type: array
+          items:
+            type: string
+        reports:
+            $ref: '#/components/schemas/ReportDto'
+        nextSlice:
+            type: boolean
+    ReportListDto:
+      type: object
+      properties:
+        unknownJobNames:
+          type: array
+          items:
+            type: string
+        reports:
+          type: array
+          items:       
+            $ref: '#/components/schemas/ReportDto'
+        nextSlice:
+            type: boolean        
+    ReportDto:
+      type: object
+      properties:
+        appType:
+          type: string
+        jobType:
+          type: string
+        mandatoryStages:
+          type: array
+          items:
+            $ref: '#/components/schemas/MandatoryStageDto'
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/JobDto'
+        maxUnknownStages:
+          type: integer
+          format: int64
+        isStageAligned:
+          type: object
+          additionalProperties:
+            type: Integer
+        totalStagePercentage:
+          type: object
+          additionalProperties:
+            type: double
+    JobDto:
+      type: object
+      properties:
+        jobName:
+          type: string
+        jobUrl:
+          type: string
+        buildNo:
+          type: string
+        buildUrl:
+          type: string
+        buildStatus:
+          type: string
+        buildStagePercentage:
+          type: double
+        stageAlignedOrNot:
+          type: boolean
+        lastSuccessBuildDuration:
+          type: string
+        helmVersion:
+          type: string
+        lastSuccessBuildTimestamp:
+          type: timestamp
+        currentCbosVersion:
+          type: boolean  
+        cbosVersion:
+          type: string
+        jobproductList:
+          type: array
+          items:
+            type: string
+        mandatoryStages:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/StageDto'
+        unknownStages:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/StageDto'
+        skippedStages:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/StageDto' 
+        conditionalStages:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ConditionalExecStatus'
+        sonarMetrics:
+           type: array
+           uniqueItems: true
+           items:
+             $ref: '#/components/schemas/MetricDto'
+        sonarQubeUrl:
+           type: string
+        sonarQualityGateStatus:
+           type: string
+        sonarReportStatusCode:
+           type: integer
+    ComponentDto:
+       type: object
+       properties:
+         key:
+           type: string
+         name:
+           type: string
+         description:
+           type: string
+         qualifier:
+           type: string
+         measures:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/MetricDto'
+         branch:
+            type: string
+    MetricDto:
+      type: object
+      properties:
+        metric:
+          type: string
+        value:
+          type: string
+        period:
+          $ref: '#/components/schemas/PeriodDto'
+    PeriodDto:
+       type: object
+       properties:
+         value:
+           type: string
+    ConditionalExecStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - FAILURE
+        - PARTIAL
+    StageDto:
+      type: object
+      properties:
+        name:
+          type: string
+        rules:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        missingRules:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        coveredRules:
+          type: integer
+        stagePercentage:
+          type: double
+        stageDiff:
+          type: integer    
+        unknownRules:
+          type: integer
+        mandatoryRulesCount:
+          type: integer
+        blueoceanStageInfo:
+           $ref: '#/components/schemas/BlueoceanStageDto'
+    MandatoryStageDto:
+      type: object
+      properties:
+        name:
+          type: string
+        rules:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        gatingEnabled:
+           type: boolean
+    UserCountDto:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        count:
+          type: integer
+          format: int64
+    BlueoceanStageDto:
+      type: object
+      properties:
+        displayName:
+          type: string
+        durationInMillis:
+          type: integer
+          format: int64
+        type:
+            $ref: '#/components/schemas/StageType'
+        result:
+            $ref: '#/components/schemas/StageResult'
+        state:
+            $ref: '#/components/schemas/StageState'
+    StageResult:
+      type: string
+      enum:
+        - SUCCESS
+        - NOT_BUILT
+        - UNSTABLE
+        - FAILURE
+    StageState:
+      type: string
+      enum:
+        - FINISHED
+        - SKIPPED
+        - NOT_BUILT
+    StageType:
+      type: string
+      enum:
+        - STAGE
+        - PARALLEL
+    ProductResponseDto:
+      type: object
+      properties:
+        jobNotification:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+        productWiseMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductWiseMetadata'
+    ProductWiseMetadata:
+      type: object
+      properties:
+        product:
+          type: string
+        totalJobs:
+          type: string
+        metaData:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetaData'
+    MetaData:
+      type: object
+      properties:
+        section:
+          type: string
+        totalJobs:
+          type: string

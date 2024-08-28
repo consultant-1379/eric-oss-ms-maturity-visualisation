@@ -1,0 +1,89 @@
+/*!******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ *
+ ******************************************************************************/
+
+.mat-card-cell-header.mat-card {
+  transition: none !important;
+  box-shadow: none !important;
+  padding: 8px;
+}
+
+mat-card-title {
+  font-size: smaller!important;
+}
+
+.cbos {
+  padding: 1px 4px;
+  max-width: 90px;
+  min-width: 90px;
+  height: 50px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: none !important;
+}
+
+.sonar-qube{
+  padding: 1px 4px;
+  max-width: 150px;
+  min-width: 150px;
+  height: 50px;
+  box-shadow: none !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.metric-row{
+  width: 70px;
+  display: flex;
+  align-items: center;
+  white-space:nowrap;
+}
+
+.bg-red {
+  background: #ff3232;
+}
+
+.bg-green {
+  background: #0fc373;
+}
+
+.bg-grey {
+  background-color: #767676 !important;
+}
+
+.green {
+  color: #0fc373;
+}
+
+.red {
+  color: #ff3232;
+}
+
+.orange {
+  color: #ff8c0a;
+}
+.info {
+  font-size: 14px;
+}
+
+.helm-not-available {
+  white-space: pre-wrap; 
+  text-align: center;
+  display: block; 
+}

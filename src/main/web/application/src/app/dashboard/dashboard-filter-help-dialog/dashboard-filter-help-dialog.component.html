@@ -1,0 +1,56 @@
+<!--
+  ~ COPYRIGHT Ericsson 2021
+  ~
+  ~
+  ~
+  ~ The copyright to the computer program(s) herein is the property of
+  ~
+  ~ Ericsson Inc. The programs may be used and/or copied only with written
+  ~
+  ~ permission from Ericsson Inc. or in accordance with the terms and
+  ~
+  ~ conditions stipulated in the agreement/contract under which the
+  ~
+  ~ program(s) have been supplied.
+  ~
+  -->
+
+<mat-dialog-content *ngIf="data['columnFilter'] ; else rowFilter" (click)="close()">
+    <h2 mat-dialog-title>Filter on column headers</h2>
+    <div class="mat-typography" mat-dialog-content>
+        <ul>
+            <li>
+                <p>The filter text is applied on columns, only on column header names. If a column has a match, it is
+                    displayed.</p>
+            </li>
+            <li>
+                <p>The matching is not case sensitive.</p>
+            </li>
+            <li>
+                <p>Multiple filter texts is not allowed.</p>
+            </li>
+        </ul>
+    </div>
+</mat-dialog-content>
+<ng-template #rowFilter>
+    <h2 mat-dialog-title>Filter on job name, build number, helm version</h2>
+    <div class="mat-typography" mat-dialog-content>
+        <ul>
+            <li>
+                <p>The filter text is applied on rows, both on service name and cells' content. If a row has a match, it is
+                    displayed.</p>
+            </li>
+            <li>
+                <p>The matching is not case sensitive.</p>
+            </li>
+            <li>
+                <p>Multiple filter texts can be combined with '||' (logical OR), then the whole expression is matched to the
+                    rows.</p>
+                <p>
+                    Example:<i> log || failed. </i>The full rows that have 'log' or 'failed' in service name or in cell
+                    content are
+                    displayed.</p>
+            </li>
+        </ul>
+    </div>
+</ng-template>

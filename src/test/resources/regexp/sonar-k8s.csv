@@ -1,0 +1,4 @@
+rule;line
+Lock acquired;[2023-10-27T14:28:24.467Z] Lock acquired on [Label: kaas, Quantity: 1]
+Cmd: cat target/sonar/report-task.txt;[2023-10-27T14:27:25.703Z] + cat target/sonar/report-task.txt
+null;null

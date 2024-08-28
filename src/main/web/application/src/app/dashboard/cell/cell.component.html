@@ -1,0 +1,23 @@
+<!--
+  ~ COPYRIGHT Ericsson 2021
+  ~
+  ~
+  ~
+  ~ The copyright to the computer program(s) herein is the property of
+  ~
+  ~ Ericsson Inc. The programs may be used and/or copied only with written
+  ~
+  ~ permission from Ericsson Inc. or in accordance with the terms and
+  ~
+  ~ conditions stipulated in the agreement/contract under which the
+  ~
+  ~ program(s) have been supplied.
+  ~
+  -->
+
+<div [ngSwitch]="cell.type">
+  <div *ngSwitchCase="cellTypes.cellText"><cell-header [cell]="getTextCell()"></cell-header></div>
+  <div *ngSwitchCase="cellTypes.cellStage"><cell-stage [cell]="getStageCell()"></cell-stage></div>
+  <div *ngSwitchCase="cellTypes.cellCustomStage"><cell-custom-stage [cell]="getCustomStageCell()"></cell-custom-stage></div>
+  <div *ngSwitchCase="cellTypes.cellEmpty"><cell-empty></cell-empty></div>
+</div>

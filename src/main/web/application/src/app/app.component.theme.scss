@@ -1,0 +1,95 @@
+/*!******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ *
+ ******************************************************************************/
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@mixin app-component-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .mat-toolbar {
+    background: #000000;
+    color: mat.get-color-from-palette($foreground, text);
+    min-height: 64px;
+  }
+
+  body {
+    font-family: "Roboto", "Helvetica Neue", "sans-serif";
+    color: mat.get-color-from-palette($foreground, text);
+    background-color: #242424;
+  }
+
+  mat-table {
+    background-color: #242424;
+  }
+
+  .cell-rules-dialog {
+    cursor: pointer;
+  }
+
+  mat-header-row,
+  mat-row,
+  mat-footer-row,
+  mat-header-cell,
+  mat-cell,
+  mat-footer-cell {
+    background-color: #242424
+  }
+
+  a {
+    color: mat.get-color-from-palette($foreground, text) !important;
+    text-decoration: none;
+
+    &:hover {
+      color: mat.get-color-from-palette($foreground, text) !important;
+      text-decoration: underline;
+    }
+    &:visited {
+      color: mat.get-color-from-palette($foreground, text) !important;
+      text-decoration: none;
+    }
+    &:active {
+      color: mat.get-color-from-palette($foreground, text) !important;
+      text-decoration: none;
+    }
+  }
+}
+
+@-webkit-keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.5;
+  }
+}
+@keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.5;
+  }
+}

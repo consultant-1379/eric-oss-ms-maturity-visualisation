@@ -1,0 +1,109 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+#Metrics related configurations
+management.endpoint.metrics.enabled: "true"
+management.endpoints.web.exposure.include: "*"
+management.endpoint.prometheus.enabled: "true"
+management.metrics.export.prometheus.enabled: "true"
+management:
+  health:
+    elasticsearch:
+      enabled: "false"
+    ldap:
+      enabled: "false"
+  metrics:
+    web:
+      server:
+        request:
+          autotime:
+            enabled: "true"
+
+#opentracing.jaeger.enabled: "true"
+elastic-search:
+   url: elastic.hahn130.rnd.gic.ericsson.se
+   username: EIAPREG100
+   password: CztvYwveBHUp8A2UQtBxDxsB
+   compatible-header: application/vnd.elasticsearch+json;compatible-with=7
+
+security:
+  jwt:
+     secret-key: RegulusMrvSecretKey
+  ldap:
+     domain: ericsson.se
+     url: ldaps://ldap-egad.internal.ericsson.com:3269
+     baseDn1: ou=CA,ou=User,ou=P001,ou=ID,ou=Data,dc=ericsson,dc=se
+     baseDn2: ou=External,ou=P017,ou=ID,OU=Data,DC=ericsson,dc=se
+     baseDn3: ou=CA,ou=SvcAccount,dc=P001,dc=ID,dc=Data,dc=ericsson,dc=se
+     searchFilter: (&(cn={1}))
+
+# Remove H2 from compile scope
+spring:
+  profiles:
+    active:
+    - ${ENV}
+  jpa:
+    open-in-view: false
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+endpoints.health.sensitive: "false"
+info.app.name: '@name@'
+info.app.description: Microservice chassis app
+info.app.version: '@version@'
+info.app.legal: "COPYRIGHT Ericsson 2021 -
+ The copyright to the computer program(s) herein is the property of
+ Ericsson Inc. The programs may be used and/or copied only with written
+ permission from Ericsson Inc. or in accordance with the terms and
+ conditions stipulated in the agreement/contract under which the
+ program(s) have been supplied."
+
+#See more details about pattern layout: https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+#See more details about logging.pattern.level : https://docs.spring.io/spring-boot/docs/2.5.2/reference/html/features.html#features.logging.custom-log-configuration
+#logging.pattern.level: "%5p [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}][%X{userName}]"
+
+#Set the stubrunner credentials:
+#stubrunner.username: <LAN SIGNUM ID>
+#stubrunner.password: <LAN encripted PWD or JFrog API Key>
+stubrunner.username: ${SELI_ARTIFACTORY_REPO_USER}
+stubrunner.password: ${SELI_ARTIFACTORY_REPO_PASS}
+
+#Credentials to jenkins servers
+jenkins:
+  username: ${JENKINS_USERNAME:}
+  #Password or access token
+  token: ${JENKINS_TOKEN:}
+
+#Database credentials (could be PostgreSQL or H2)
+db.datasource:
+  jdbcUrl: ${DB_URL}
+  driverClassName: ${DB_DRIVER_CLASS_NAME}
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
+  
+functional:
+  user: EIAPREG100
+  password: CztvYwveBHUp8A2UQtBxDxsB
+
+#Jobs without any products will be listed in this product name
+ungrouped.product.name: Ungrouped
+#cron to run process which collect logs from jenkins - default each 5 min from MON-SAT
+processor.cron.expression:  ${JENKINS_PROCESSOR_CRON:0 */5 * ? * 1-6}
+
+#cron to run process which delete the old records in database- default each 5 min on sunday
+purge.cron.expression:  ${JENKINS_PROCESSOR_CRON:0 */5 * ? * 0}
+
+purge.job-product-cron.expression: ${JENKINS_PROCESSOR_CRON:0 0 0 * * ?}

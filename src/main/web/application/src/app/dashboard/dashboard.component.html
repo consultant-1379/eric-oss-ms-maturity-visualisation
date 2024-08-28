@@ -1,0 +1,95 @@
+<!--
+  ~ COPYRIGHT Ericsson 2021
+  ~
+  ~
+  ~
+  ~ The copyright to the computer program(s) herein is the property of
+  ~
+  ~ Ericsson Inc. The programs may be used and/or copied only with written
+  ~
+  ~ permission from Ericsson Inc. or in accordance with the terms and
+  ~
+  ~ conditions stipulated in the agreement/contract under which the
+  ~
+  ~ program(s) have been supplied.
+  ~
+  -->
+
+  <mat-accordion *ngIf="this.techs">
+    <mat-expansion-panel (opened)="mapDataToTable()">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <section class="mat-typography job-head">
+                <h2>
+                    {{this.techs.replaceAll('_', ' ') | titlecase}} (<span *ngIf="count">{{count}}</span>)
+                </h2>
+            </section>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="display: flex; margin: 0 32px -16px 32px; gap: 50px; justify-content: start; align-items: center;">
+        <div style="display: flex;">
+            <mat-form-field  appearance="outline" style="width: 300px;" >
+                <mat-label>Filter on jobs, builds, helm version</mat-label>
+                <input (keyup)="onFilterChange()" [(ngModel)]="filter"
+                       matInput placeholder="Filter on jobs, builds, helm version">
+            </mat-form-field>
+            <mat-icon class="filter-help-icon" (click)="openFilterHelpDialog(false)">help_outline</mat-icon>
+        </div>
+        <div style="display: flex;">
+            <mat-form-field appearance="outline" style="width: 300px;">
+                <mat-label>Filter on column headers</mat-label>
+                <input [(ngModel)]="columnFilter"
+                       matInput placeholder="Filter on column headers">
+            </mat-form-field>
+            <mat-icon class="filter-help-icon" (click)="openFilterHelpDialog(true)">help_outline</mat-icon>
+        </div>
+      </div>
+
+        <mat-table *ngIf="dataSource.data.length" [dataSource]="dataSource">
+            <ng-container *ngFor="let column of columns" [cdkColumnDef]="column.columnDef">
+                <mat-header-cell *cdkHeaderCellDef
+                                 [class]="getClassName(column)"
+                                 [fxHide]="column.hide"
+                                 (click)="openRulesDialog(column)">
+                    <div *ngIf="column.header === 'column-spacer'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock></ng-template>
+                    <ng-template #elseBlock>
+                        <div [ngStyle]="{ 'padding-left':  column.header === 'MS Pipeline Name' ? '9px' : '0' } " [ngClass]="column.header === 'Custom Stages' ? 'custom-stages':''">
+                            <div style="display: inline-flex;">
+                                <p style="text-wrap: nowrap; margin-left: 5px; margin-top: 0; margin-bottom: 0;" *ngIf="column.id ==='7'"> Golden Stages </p>
+                                <ng-container *ngIf="column.subColumns && column.subColumns.length > 0">
+                                    <mat-icon (click)="expand(column)" class="expand-icon" > {{ column.isExpanded ? 'indeterminate_check_box' : 'add_box' }} </mat-icon>
+                                </ng-container>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: center;">
+                                <column-header [header]="column.header" [url]="column.url" [gatingEnabled]="column.gatingEnabled"  [headerToolTip]="column.headerToolTip"></column-header>
+                            </div>
+                        </div>
+
+                        <ng-container *ngIf="doStagesAligned[column.header] !== undefined">
+                            <div class="va-aligned">
+                                <mat-icon [matTooltip]= 'getVATooltip(column.header)' matTooltipClass="tooltip" [ngClass]="doStagesAligned[column.header] == 0 ? 'orange' : doStagesAligned[column.header] > 0 ? 'green' : 'red'"> {{
+                                    doStagesAligned[column.header] == 0 ? 'code' : doStagesAligned[column.header] > 0 ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+                                </mat-icon>
+                                <span>{{stagesAlignedPercentage[column.header] | number : '1.0-2' }}%</span>
+                            </div>
+                        </ng-container>
+                    </ng-template>
+                </mat-header-cell>
+                <mat-cell *cdkCellDef="let row"
+                          [class]="getClassName(column, row)">
+                    <div *ngIf="column.header === 'column-spacer' || row[0].text === 'first-header-spacer'; then thenBlock else elseBlock"></div>
+                    <ng-template #thenBlock></ng-template>
+                    <ng-template #elseBlock>
+                        <cell-component [cell]="column.cell(row)"></cell-component>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="getFilteredColumns(); sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: getFilteredColumns();"></mat-row>
+          </mat-table>
+          <app-loader *ngIf="(loader$ | async) === 'start'"></app-loader>
+    </mat-expansion-panel>
+</mat-accordion>
+

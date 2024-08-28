@@ -1,0 +1,4 @@
+rule;line
+Bob Rule: lint:markdownlint;[2023-10-16T15:05:19.604Z] 2023-10-16 17:05:19,415 - [bob] - INFO - ==== Executing rule: [lint] task:[markdownlint]
+Bob Rule: image;[2023-10-16T15:05:19.604Z] 2023-10-16 17:05:19,415 - [bob] - INFO - ==== Executing rule: [image] task:[none]
+Bob Task: clean:mvn-clean;[2023-10-16T15:05:05.766Z] 2023-10-16 17:05:05,755 - [bob] - INFO - ---- Executing task [clean:mvn-clean]

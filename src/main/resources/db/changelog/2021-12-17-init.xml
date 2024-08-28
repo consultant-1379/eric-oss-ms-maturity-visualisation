@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2021
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="2021-12-18-init-tables" author="eugene.riaboshtan">
+        <createTable tableName="PRODUCT">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="product" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="datetime"/>
+        </createTable>
+        <createTable tableName="JOB_PRODUCT">
+            <column name="job_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="job">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="jenkins_url" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="app_type" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="products" type="text"/>
+            <column name="created" type="datetime"/>
+        </createTable>
+        <createTable tableName="build">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="job_id" type="bigint">
+                <constraints references="job(id)"
+                             foreignKeyName="FK_JOB_ID"
+                             nullable="false"/>
+            </column>
+            <column name="build_no" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cbos_version" type="text"/>
+            <column name="created" type="datetime"/>
+        </createTable>
+        <createTable tableName="stage">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="build_id" type="bigint">
+                <constraints references="build(id)"
+                             foreignKeyName="FK_BUILD_ID"
+                             nullable="false"/>
+            </column>
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rules" type="text"/>
+            <column name="created" type="datetime"/>
+        </createTable>
+        <createSequence sequenceName="GENERIC_ID_SEQ"
+                        startValue="1"
+                        minValue="1"
+                        incrementBy="1"/>
+    </changeSet>
+</databaseChangeLog>

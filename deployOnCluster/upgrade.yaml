@@ -1,0 +1,51 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+modelVersion: 2.0
+
+description: "Rules for deploying MS Maturity Tool"
+
+docker-images:
+  - helm: armdocker.rnd.ericsson.se/dockerhub-ericsson-remote/alpine/helm:3.5.4
+  - python: armdocker.rnd.ericsson.se/proj_openstack_tooling/python:3.9.4-alpine-curl
+  - kubectl: armdocker.rnd.ericsson.se/dockerhub-ericsson-remote/bitnami/kubectl:1.20.8
+  - adp-release-auto: armdocker.rnd.ericsson.se/proj-adp-cicd-drop/bob-adp-release-auto:latest
+
+properties:
+  - ARM: https://arm.seli.gic.ericsson.se/artifactory
+  - REPO: proj-eric-oss-drop-helm
+  - CHART_LOCATION_IN_HELM_REPO: eric-oss-ms-maturity-visualisation
+  - NAMESPACE_TO_DEPLOY_TO: mrv
+  - DOCKER_HUB_SECRET_NAME: docker-hub
+
+var:
+  - CHART_NAME
+
+env:
+  - HELM_CHART_REPO_USER
+  - HELM_CHART_REPO_KEY
+  - PWD
+  - KUBECONFIG
+rules:
+  run-helm-upgrade:
+    - task: find-chart-name-on-cluster
+      docker-image: adp-release-auto
+      cmd: helm --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO} list | grep ${CHART_LOCATION_IN_HELM_REPO} | cut -f1 > .bob/var.CHART_NAME
+    - task: helm-upgrade-tool-on-cluster
+      docker-image: adp-release-auto
+      cmd:
+        - /bin/sh -c \
+          'helm repo add ${REPO} "${ARM}/${REPO}" --username ${env.HELM_CHART_REPO_USER} --password ${env.HELM_CHART_REPO_KEY}; helm repo update; helm upgrade ${var.CHART_NAME} ${REPO}/${CHART_LOCATION_IN_HELM_REPO} --kubeconfig ${env.KUBECONFIG} -n ${NAMESPACE_TO_DEPLOY_TO} --devel --install --set global.pullSecret=${DOCKER_HUB_SECRET_NAME}'

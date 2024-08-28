@@ -1,0 +1,32 @@
+<!--
+  ~ COPYRIGHT Ericsson 2021
+  ~
+  ~
+  ~
+  ~ The copyright to the computer program(s) herein is the property of
+  ~
+  ~ Ericsson Inc. The programs may be used and/or copied only with written
+  ~
+  ~ permission from Ericsson Inc. or in accordance with the terms and
+  ~
+  ~ conditions stipulated in the agreement/contract under which the
+  ~
+  ~ program(s) have been supplied.
+  ~
+  -->
+
+  <div [matTooltip]="headerToolTipComp" matTooltipClass="tooltip">
+    <p *ngIf="url && url.length; then thenBlock else elseBlock"></p>
+    <ng-template #thenBlock>
+        <a [href]="url" target="_blank">
+            {{header}}
+        </a>
+    </ng-template>
+    <ng-template #elseBlock>
+        <div style="display: flex; align-items: flex-start;">
+            <mat-icon matTooltip="Gated stage" matTooltipClass="tooltip" style="padding-left: 8px; font-size: 16px; height: 18px; width: 18px;" *ngIf="gatingEnabled">lock</mat-icon>
+            <span>{{header}}</span>
+        </div>
+
+    </ng-template>
+</div>

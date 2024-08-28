@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ ~ COPYRIGHT Ericsson 2021
+ ~
+ ~
+ ~
+ ~ The copyright to the computer program(s) herein is the property of
+ ~
+ ~ Ericsson Inc. The programs may be used and/or copied only with written
+ ~
+ ~ permission from Ericsson Inc. or in accordance with the terms and
+ ~
+ ~ conditions stipulated in the agreement/contract under which the
+ ~
+ ~ program(s) have been supplied.
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  COPYRIGHT Ericsson 2021
+
+
+
+  The copyright to the computer program(s) herein is the property of
+
+  Ericsson Inc. The programs may be used and/or copied only with written
+
+  permission from Ericsson Inc. or in accordance with the terms and
+
+  conditions stipulated in the agreement/contract under which the
+
+  program(s) have been supplied.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <include relativeToChangelogFile="true" file="2021-12-17-init.xml"/>
+    <include relativeToChangelogFile="true" file="2021-12-18-init.xml"/>
+    <include relativeToChangelogFile="true" file="2022-11-18-init.xml"/>
+    <include relativeToChangelogFile="true" file="2023-07-28-init.xml"/>
+    <include relativeToChangelogFile="true" file="2023-10-23-init.xml"/>
+    <include relativeToChangelogFile="true" file="2023-12-27-init.xml"/>
+    <include relativeToChangelogFile="true" file="2024-06-07-init.xml"/>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+
+config:
+  stageNameRegexp: '^\[Pipeline\] \{ \(((?!Branch: |.*\.Jenkinsfile).*)\)'
+  skippedStageNameRegexp: 'Stage\s+"([^"]+)"\s+skipped\s+\w+\s+\w+'
+
+  #regular expression to parse cbos version - test lines stored in src/test/resources/regexp/cbos version.csv
+  cbosVersionRegexp: .*CBOS_VERSION=([\d.-]+).*|.*CBOS_IMAGE_TAG=([\d.-]+).*|.*CBOS_VER=([\d.-]+).*|.*COMMON_BASE_OS_URL:([\d.-]+).*|.*sles:([\d.-]+).*|.*CBO version :\s([\d.-]+).*
+  sonarRegexp: '.*(?:ANALYSIS SUCCESSFUL|QUALITY GATE STATUS).+?(https?://\S+).*'
+  ruleAndTaskRegex: 'Executing task \[(.*?)\]|Executing rule: \[(.*?)\] task:\[(.*?)\]'
+  dockerRunRuleRegex: '(docker run( --init)? --rm --workdir)(.*)(\s\S+$)'
+  sonarAndK8sRegex: '(Lock acquired|cat target/sonar/report-task.txt)'

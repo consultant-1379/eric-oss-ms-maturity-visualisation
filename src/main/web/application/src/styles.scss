@@ -1,0 +1,64 @@
+/*!******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ *
+ ******************************************************************************/
+ 
+@use '@angular/material' as mat;
+
+@import '~@angular/material/theming';
+@import 'app/app.component.theme';
+
+@include mat.core();
+
+$dark-primary: mat.define-palette(mat.$blue-gray-palette);
+$dark-accent:  mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$dark-warn:    mat.define-palette(mat.$deep-orange-palette);
+
+$dark-theme: mat.define-dark-theme($dark-primary, $dark-accent, $dark-warn);
+// enable dark theme for the default angular components
+@include app-component-theme($dark-theme);
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+.wrapper-flex {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+router-outlet.router-flex + * {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.section-name {
+  min-width: 250px;
+  font-size: larger !important;
+}
+
+.cells-container {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+mat-icon {
+  cursor: pointer;
+}

@@ -1,0 +1,229 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# Default values for eric-oss-ms-maturity-visualisation.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+#  timezone: UTC
+  registry:
+    url: armdocker.rnd.ericsson.se
+    imagePullPolicy: IfNotPresent
+    repoPath: # see default in eric-product-info.yaml
+  networkPolicy:
+    enabled: true
+  log:
+    streamingMethod: "direct"
+  security:
+    tls:
+      enabled: false
+  logShipper:
+    deployment:
+      type: "sidecar"
+#  #Secret must be manually created in the namespace, no default value
+#  pullSecret: eric-adp-example-secret
+#  fsGroup:
+#    manual: 10000
+#    namespace: true
+#  # The IP family the service belongs to when service.type is set to ClusterIP.
+#  # Options are: IPv4, IPv6
+#  internalIPFamily:
+#  security:
+#    policyBinding:
+#      create: true
+#    policyReferenceMap:
+#      default-restricted-security-policy: "<restricted security policy at customer deployment>"
+#    tls:
+#      enabled: true
+
+replicaCount: 1
+
+podDisruptionBudget:
+  # Minimum number/percentage of Pods that must remain available during the planned disruption.
+  # Value can be expressed as an integer or as a percentage. When specified as a percentage of the Pods,
+  # if it does not map to an exact number, Kubernetes rounds up to the nearest integer.
+  # minAvailable: 2 # example value for 2 pods defined as integer
+  minAvailable: "40%"
+
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+#Empty labels list for application deployment engineer to add more labels (In Compliance with DR-D1121-068).
+labels: {}
+
+imageCredentials:
+  eric-oss-ms-maturity-visualisation:
+    #repoPath: # see default in eric-product-info.yaml
+    registry: {}
+      # overrides global registry url
+      # url:
+      #- Secret must be manually created in the namespace, no default value
+      # pullSecret: REPO_SECRET
+  eric-oss-ms-maturity-visualisationTest:
+    repoPath: # see default in eric-product-info.yaml
+
+eric-oss-ms-maturity-visualisation-data:
+  enabled: true
+  databaseVendor: POSTGRES
+  postgresUser: app_ms_user
+  name: eric-oss-ms-maturity-visualisation-data
+  postgresDatabase: app_ms_db
+  imageCredentials:
+    repoPath: proj-document-database-pg/data
+  images:
+    eric-oss-ms-maturity-visualisation-data:
+      name: eric-data-document-database-pg
+      tag: 8.4.0-73 # We should figure out how to update this automatically with 'latest'
+      pullPolicy: IfNotPresent
+  credentials:
+    kubernetesSecretName: eric-oss-ms-maturity-visualisation
+    keyForUserId: username
+    keyForUserPw: password
+    keyForSuperPw: super-password
+  service:
+    port: 5432
+  highAvailability:
+    synchronousModeEnabled: false
+    replicaCount: 1
+  persistentVolumeClaim:
+    size: 2Gi
+    backup:
+      enabled: false
+  restore:
+    enabled: false
+  global:
+    security:
+      tls:
+        enabled: false
+  security:
+    tls:
+      brAgent:
+        enabled: false
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+annotations: {}
+
+service:
+  type: ClusterIP
+  port: 8080    # Changed from 80 to 8080 and spring application is hosted on 8080
+  endpoints:
+    chassisapi:
+      tls:
+        enforced: required
+        verifyClientCertificate: required
+
+ingress:
+  enabled: false
+  ingressClass: OAM-IngressClass
+  hosts:
+    - host: chart-example.local
+      paths: [/]
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+eric-pm-server:
+  rbac:
+    appMonitoring:
+      enabled: true
+
+prometheus:
+  path: /actuator/prometheus
+  scrape: true
+
+terminationGracePeriodSeconds: 30
+
+probes:
+  termination:
+    livenessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      timeoutSeconds: 10
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 60
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 10
+
+resources:
+  eric-oss-ms-maturity-visualisation:
+    requests:
+      memory: 256Mi
+      cpu: 125m
+      ephemeral-storage: ""
+    limits:
+      memory: 20Gi
+      cpu: 5000m
+      ephemeral-storage: ""
+  eric-oss-ms-maturity-visualisationTest:
+    requests:
+      memory: 128Mi
+      cpu: 50m
+      ephemeral-storage: ""
+    limits:
+      memory: 1Gi
+      cpu: 256m
+      ephemeral-storage: ""
+
+autoScaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+topologySpreadConstraints:
+  deployment: []
+  test: []
+tolerations: []
+
+affinity:
+  podAntiAffinity: "soft"
+
+# Pod priority configuration for deployments
+podPriority:
+  maturity:
+    priorityClassName: ""  # No priority set to discovery
+
+jenkins:
+  username: mmtadm
+  token: Er4mrqvBybp7F6MWtCtGn9Fg
+
+eric-log-shipper:
+  enabled: true
+eric-data-document-database-pg:
+  log:
+    streamingMethod: "stdout"

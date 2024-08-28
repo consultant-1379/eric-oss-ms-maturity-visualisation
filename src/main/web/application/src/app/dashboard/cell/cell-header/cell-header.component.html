@@ -1,0 +1,79 @@
+<!--
+  ~ COPYRIGHT Ericsson 2021
+  ~
+  ~
+  ~
+  ~ The copyright to the computer program(s) herein is the property of
+  ~
+  ~ Ericsson Inc. The programs may be used and/or copied only with written
+  ~
+  ~ permission from Ericsson Inc. or in accordance with the terms and
+  ~
+  ~ conditions stipulated in the agreement/contract under which the
+  ~
+  ~ program(s) have been supplied.
+  ~
+  -->
+
+<mat-card class="mat-card-cell-header">
+  <mat-card-title>
+    <ng-container *ngIf="cell.url && cell.url.length; else noLink">
+      <span *ngIf="cell.columnId == 2">
+        <a [href]="cell.url" target="_blank" [matTooltip]= 'getBuildTooltip()' matTooltipClass="tooltip">{{cell.text}}</a>
+      </span>
+      <a [href]="cell.url" target="_blank" *ngIf="cell.columnId !== 2">{{cell.text}}
+        <mat-icon *ngIf="cell.jobproductList && cell.jobproductList.length>1" class ="info" [matTooltip]= 'getJobTooltip()' matTooltipClass="tooltip"> {{'info'}}
+        </mat-icon>
+      </a>
+    </ng-container>
+    <ng-template #noLink>
+      <div *ngIf="cell.columnId == 3" style="display: flex; align-items: center;">
+        <mat-icon *ngIf="cell.isAligned==null" class="orange">code</mat-icon>
+        <mat-icon *ngIf="cell.isAligned!==null" [ngClass]="cell.isAligned ? 'green' : 'red'"> {{
+          cell.isAligned ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+        </mat-icon>
+        <span>{{cell.text | number : '1.2-2'}}</span>
+      </div>
+      <div *ngIf="cell.columnId == 4">
+        <span class="helm-not-available">{{cell.text}}</span>
+      </div>
+      <div *ngIf="cell.columnId == 5">
+        <span class="cbos"
+        [ngClass]="cell.text===unAvailable? '' : cell.isCurrentCbos ? 'bg-green' : 'bg-red'"
+        >{{cell.text}}</span>
+      </div>
+      <div *ngIf="cell.columnId == 6">
+        <div *ngIf="(cell.sonarStageStatus === 'SUCCESS' || cell.sonarStageStatus === 'PARTIAL') && cell.sonarMetrics?.length; then thenBlock else elseBlock "></div>
+        <ng-template #elseBlock>
+          <ng-template [ngIf]="(cell.sonarStageStatus === 'SUCCESS' || cell.sonarStageStatus === 'PARTIAL') && cell.sonarQubeUrl" [ngIfElse]="notAvailCell">
+            <a [href]="cell.sonarQubeUrl" target="_blank" style="text-decoration: none;">
+              <div class="sonar-qube bg-red" [matTooltip]='getSonarFailureTooltip()' matTooltipClass="tooltip">{{ getSonarStatusCodeText() }}</div></a>
+          </ng-template>
+        </ng-template>
+        <ng-template #notAvailCell ><div [matTooltip]='getSonarFailureTooltip()' matTooltipClass="tooltip">{{cell.sonarMissing ? 'Stage Not Available': notAvailSonar}}</div> </ng-template>
+        <ng-template #thenBlock>
+          <a [href]="cell.sonarQubeUrl" target="_blank" style="text-decoration: none;">
+          <div class="sonar-qube" [ngClass]="cell.sonarStageStatus === 'PARTIAL' ? 'bg-grey' : cell.sonarQualityGateStatus === 'OK' ? 'bg-green' : 'bg-red' " >
+            <div class="metric-row " [matTooltip]="getSonarMetricsTooltip(bugs)" matTooltipClass="tooltip">
+              <mat-icon style="transform: scale(0.7);">error_outline</mat-icon>
+              <span>{{sonarValues[bugs]}}</span>
+            </div>
+            <div class="metric-row" [matTooltip]="getSonarMetricsTooltip(vulnerabilities)" matTooltipClass="tooltip">
+              <mat-icon style="transform: scale(0.7);">lock_open</mat-icon>
+              <span>{{sonarValues[vulnerabilities]}}</span>
+            </div>
+            <div class="metric-row" [matTooltip]="getSonarMetricsTooltip(coverage)" matTooltipClass="tooltip">
+              <mat-icon style="transform: scale(0.7);">view_headline</mat-icon>
+              <span>{{sonarValues[coverage]}}</span>
+            </div>
+            <div class="metric-row" [matTooltip]="getSonarMetricsTooltip(sqale_index)" matTooltipClass="tooltip">
+              <mat-icon style="transform: scale(0.7);">savings</mat-icon>
+              <span>{{sonarValues[sqale_index]}}</span>
+            </div>
+          </div>
+        </a>
+        </ng-template>
+      </div>
+    </ng-template>
+  </mat-card-title>
+</mat-card>

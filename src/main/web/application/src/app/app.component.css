@@ -1,0 +1,92 @@
+/*******************************************************************************
+ * COPYRIGHT Ericsson 2021
+ *
+ *
+ *
+ * The copyright to the computer program(s) herein is the property of
+ *
+ * Ericsson Inc. The programs may be used and/or copied only with written
+ *
+ * permission from Ericsson Inc. or in accordance with the terms and
+ *
+ * conditions stipulated in the agreement/contract under which the
+ *
+ * program(s) have been supplied.
+ ******************************************************************************/
+
+ .icon-height{
+    height: 24px;
+    width: 24px;
+ }
+
+ .custom-toolbar{
+    justify-content: space-between;
+ }
+
+ .right-end-span{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+ }
+
+ .user-info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+ .user-icon{
+    margin: 0 4px;
+ }
+
+ .user-id{
+    font-weight: 100;
+    font-size: medium;
+ }
+
+ .logout-logo{
+    margin-left: 4px;
+ }
+
+ .logout-button{
+   background: inherit;
+   color: inherit;
+   border: 1px solid #ffffff;
+ }
+
+ /* .helpIcon {
+    position: absolute;
+    right: 1rem;
+}
+
+.NotificIcon {
+    position: absolute;
+    right: 4rem;
+} */
+
+.menuColor {
+    background-color: #4a4a4a;
+    color: #ffffff;
+}
+
+.headerClass {
+    font-weight: bold;
+    border-bottom: 1px solid;
+    cursor: default;
+}
+
+.cursor-default {
+    cursor: default;
+}
+
+.loader-centered{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+}
+
+::ng-deep div.mat-menu-panel > div.mat-menu-content {
+    max-height: 250px !important;
+    min-height: 100px !important;
+}

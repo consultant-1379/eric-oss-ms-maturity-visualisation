@@ -1,0 +1,30 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: eric-oss-ms-maturity-visualisation-ingress
+spec:
+  rules:
+  - host: msmaturity.ews.gic.ericsson.se
+    http:
+      paths:
+      - backend:
+          serviceName: eric-oss-ms-maturity-visualisation
+          servicePort: 8080
+        path: /
+

@@ -1,0 +1,1232 @@
+#
+# COPYRIGHT Ericsson 2021
+#
+#
+#
+# The copyright to the computer program(s) herein is the property of
+#
+# Ericsson Inc. The programs may be used and/or copied only with written
+#
+# permission from Ericsson Inc. or in accordance with the terms and
+#
+# conditions stipulated in the agreement/contract under which the
+#
+# program(s) have been supplied.
+#
+
+# File to configure "gold standards" depends on application type: java, python, ui,c++
+#standards:
+#  - appType: java
+#    stages:
+#      publish: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+#          ...
+#      preCodeReview: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+#  - appType: python
+#    stages:
+#      publish: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+#          ...
+#      preCodeReview: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+#  - appType: ui
+#    stages:
+#      publish: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+#          ...
+#      preCodeReview: - list of stages with rules
+#        - name: 'stageName'
+#          rules:
+#            - 'rule 1 name'
+#            - 'rule 2 name'
+
+rules-init-other-pcr: &rules-init-other-pcr
+- 'Bob Rule: init-precodereview'
+- 'Bob Rule: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-precodereview:preliminary-revision'
+- 'Bob Task: init-precodereview:image-repopath-internal'
+- 'Bob Task: init-precodereview:image-registry'
+- 'Bob Task: init-precodereview:image-full-name-internal'
+- 'Bob Task: init-precodereview:helm-chart-repo-internal'
+- 'Bob Task: init-precodereview:image-dr-vm-args'
+- 'Bob Task: init-precodereview:update-eridoc-config-with-version'
+- 'Bob Task: init-precodereview:create-openapi-files-if-not-present'
+
+rules-init-java-pcr: &rules-init-java-pcr
+- 'Bob Rule: init-precodereview'
+- 'Bob Rule: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-common:fetch-pom-version'
+- 'Bob Task: init-common:create-temp-dir'
+- 'Bob Task: init-precodereview:update-pom-version'
+- 'Bob Task: init-precodereview:preliminary-revision'
+- 'Bob Task: init-precodereview:image-repopath-internal'
+- 'Bob Task: init-precodereview:image-registry'
+- 'Bob Task: init-precodereview:image-full-name-internal'
+- 'Bob Task: init-precodereview:helm-chart-repo-internal'
+- 'Bob Task: init-precodereview:image-dr-vm-args'
+- 'Bob Task: init-precodereview:update-eridoc-config-with-version'
+- 'Bob Task: init-precodereview:create-openapi-files-if-not-present'
+
+rules-init-go-pcr: &rules-init-go-pcr
+- 'Bob Rule: init-precodereview'
+- 'Bob Rule: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-common:image-registry'
+- 'Bob Task: init-common:create-build-dir'
+- 'Bob Task: init-common:update-eridoc-config-version'
+- 'Bob Task: init-precodereview:preliminary-revision'
+- 'Bob Task: init-precodereview:image-repopath-internal'
+- 'Bob Task: init-precodereview:image-full-name-internal'
+- 'Bob Task: init-precodereview:helm-repopath-internal'
+- 'Bob Task: init-precodereview:image-dr-vm-args'
+- 'Bob Task: init-precodereview:create-openapi-files-if-not-present'
+
+rules-init-other-pub: &rules-init-other-pub
+- 'Bob Rule: init-drop'
+- 'Bob Task: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-drop:commit'
+- 'Bob Task: init-drop:full-revision'
+- 'Bob Task: init-drop:image-repopath-internal'
+- 'Bob Task: init-drop:image-repopath-drop'
+- 'Bob Task: init-drop:image-registry'
+- 'Bob Task: init-drop:image-full-name-internal'
+- 'Bob Task: init-drop:helm-chart-repo-internal'
+- 'Bob Task: init-drop:adp-artifacts-properties'
+- 'Bob Task: init-drop:write-git-details'
+- 'Bob Task: init-drop:image-dr-vm-args'
+- 'Bob Task: init-drop:update-eridoc-config-with-version'
+- 'Bob Task: init-drop:create-openapi-files-if-not-present'
+
+rules-init-java-pub: &rules-init-java-pub
+- 'Bob Rule: init-drop'
+- 'Bob Rule: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-common:fetch-pom-version'
+- 'Bob Task: init-common:create-temp-dir'
+- 'Bob Task: init-drop:update-pom-version'
+- 'Bob Task: init-drop:full-revision'
+- 'Bob Task: init-drop:image-repopath-internal'
+- 'Bob Task: init-drop:image-repopath-drop'
+- 'Bob Task: init-drop:image-registry'
+- 'Bob Task: init-drop:image-full-name-internal'
+- 'Bob Task: init-drop:helm-chart-repo-internal'
+- 'Bob Task: init-drop:adp-artifacts-properties'
+- 'Bob Task: init-drop:write-git-details'
+- 'Bob Task: init-drop:image-dr-vm-args'
+- 'Bob Task: init-drop:update-eridoc-config-with-version'
+- 'Bob Task: init-drop:create-openapi-files-if-not-present'
+
+rules-init-go-pub: &rules-init-go-pub
+- 'Bob Rule: init-drop'
+- 'Bob Task: init-common'
+- 'Bob Task: init-common:version'
+- 'Bob Task: init-common:rstate'
+- 'Bob Task: init-common:commit'
+- 'Bob Task: init-common:image-registry'
+- 'Bob Task: init-common:create-build-dir'
+- 'Bob Task: init-common:update-eridoc-config-version'
+- 'Bob Task: init-drop:full-revision'
+- 'Bob Task: init-drop:image-repopath-internal'
+- 'Bob Task: init-drop:image-repopath-drop'
+- 'Bob Task: init-drop:image-full-name-internal'
+- 'Bob Task: init-drop:image-full-name-drop'
+- 'Bob Task: init-drop:helm-repopath-internal'
+- 'Bob Task: init-drop:helm-repopath-drop'
+- 'Bob Task: init-drop:image-dr-vm-args'
+- 'Bob Task: init-drop:adp-artifacts-properties'
+- 'Bob Task: init-drop:write-git-details'
+- 'Bob Task: init-drop:create-openapi-files-if-not-present'
+
+rules-lint-other: &rules-lint-other
+- 'Bob Rule: lint'
+- 'Bob Task: lint:markdownlint lint:vale'
+- 'Bob Task: lint:helm'
+- 'Bob Task: lint:helm-chart-check'
+- 'Bob Task: lint:metrics-check'
+- 'Bob Rule: validate-sdk' 
+- 'Bob Task: validate-sdk:check-sdk'
+
+rules-lint-java: &rules-lint-java
+- 'Bob Rule: lint'
+- 'Bob Task: lint:markdownlint lint:vale'
+- 'Bob Task: lint:helm'
+- 'Bob Task: lint:helm-chart-check'
+- 'Bob Task: lint:license-check'
+- 'Bob Task: lint:oas-bth-linter'
+- 'Bob Rule: validate-sdk' 
+- 'Bob Task: validate-sdk:check-sdk'
+
+rules-lint-go: &rules-lint-go
+- 'Bob Rule: lint'
+- 'Bob Task: lint:markdownlint lint:vale'
+- 'Bob Task: lint:helm'
+- 'Bob Task: lint:helm-dr-check'
+- 'Bob Task: lint:golang'
+- 'Bob Task: lint:metrics-check'
+
+rules-build-java: &rules-build-java
+- 'Bob Rule: build'
+- 'Bob Task: build:mvn-package'
+
+rules-build-go: &rules-build-go
+- 'Bob Rule: build'
+- 'Bob Task: build:verify-go-binary'
+
+rules-test-java: &rules-test-java
+- 'Bob Rule: test'
+- 'Bob Task: test:mvn-package'
+
+rules-test-go: &rules-test-go
+- 'Bob Rule: test'
+- 'Bob Task: test:test'
+
+rules-sonarqube-pcr: &rules-sonarqube-pcr
+- 'Bob Rule: sonar-enterprise-pcr'
+- 'Bob Task: sonar-enterprise-pcr:generate-version-prefix'
+- 'Bob Task: sonar-enterprise-pcr:mvn-sonar-enterprise-sonarqube-analysis'
+
+rules-sonarqube-pub: &rules-sonarqube-pub
+- 'Bob Rule: sonar-enterprise-release'
+- 'Bob Task: sonar-enterprise-release:sonarqube-analysis'
+
+rules-image: &rules-image
+- 'Bob Rule: image'
+- 'Bob Task: image:docker-build'
+- 'Bob Rule: image-dr-check'
+- 'Bob Task: image-dr-check:check-image-dr'
+
+
+rules-package: &rules-package
+- 'Bob Rule: package'
+# - 'Bob Rule: package-local'
+- 'Bob Task: package-local:image-push-internal'
+- 'Bob Task: package-local:package-helm-internal'
+- 'Bob Task: package:helm-upload-internal'
+# - 'Bob Rule: delete-images-from-agent'
+# - 'Bob Task: delete-images-from-agent:delete-internal-image'
+
+rules-package-go: &rules-package-go
+- 'Bob Rule: package'
+- 'Bob Task: package:upload-docker-image'
+- 'Bob Task: package:helm-package'
+- 'Bob Task: package:upload-helm-chart'
+- 'Bob Rule: delete-images'
+- 'Bob Task: delete-images:delete-internal-image'
+
+rules-k8s-resource-lock: &rules-k8s-resource-lock # doubt
+- Lock acquired # Check with Judah
+- 'Bob Rule: delete-namespace'
+- 'Bob Rule: find-docker-config-basepath'
+- 'Bob Task: find-docker-config-basepath:find-docker-config-basepath'
+- 'Bob Task: delete-namespace:delete-release'
+- 'Bob Task: delete-namespace:delete-namespace'
+
+rules-helm-install: &rules-helm-install
+- 'Bob Rule: helm-dry-run'
+- 'Bob Rule: find-docker-config-basepath'
+- 'Bob Task: find-docker-config-basepath:find-docker-config-basepath' 
+- 'Bob Task: helm-dry-run:helm-dry-run'
+- 'Bob Rule: helm-install'
+- 'Bob Rule: helm-install-prep'
+- 'Bob Task: helm-install:helm-install-or-upgrade'
+- 'Bob Rule: kaas-info'
+- 'Bob Task: kaas-info:get-kaas-info'
+- 'Bob Task: kaas-info:output-kaas-info'
+- 'Bob Rule: collect-k8s-logs'
+- 'Bob Task: collect-k8s-logs:collect-logs-using-script'
+- 'Bob Rule: delete-namespace'
+- 'Bob Rule: find-docker-config-basepath'
+- 'Bob Task: find-docker-config-basepath:find-docker-config-basepath'
+- 'Bob Task: delete-namespace:delete-release'
+- 'Bob Task: delete-namespace:delete-namespace'
+
+rules-vulnerability-analysis-go: &rules-vulnerability-analysis-go
+  #hadolint
+- 'Bob Rule: hadolint-scan'
+- 'Bob Task: hadolint-scan:hadolint-scan'
+- 'Bob Task: hadolint-scan:-hadolint-result-check'
+#kubeaudit-scan
+- 'Bob Rule: kubeaudit-scan'
+- 'Bob Task: kubeaudit-scan:helm-template'
+- 'Bob Task: kubeaudit-scan:kubeaudit-scan'
+  #kubesec-scan
+- 'Bob Rule: kubesec-scan'
+- 'Bob Task: kubesec-scan:helm-template'
+- 'Bob Task: kubesec-scan:kubesec-scan-test'
+
+rules-vulnerability-analysis: &rules-vulnerability-analysis
+  #hadolint
+- 'Bob Rule: hadolint-scan'
+- 'Bob Task: hadolint-scan:hadolint-scan-test'
+- 'Bob Rule: evaluate-design-rule-check-resultcodes'
+- 'Bob Rule: evaluate-design-rule-check-resultcodes:hadolint-result-check'
+  #kube-audit
+- 'Bob Rule: kube-audit'
+- 'Bob Task: kube-audit:helm-template'
+- 'Bob Task: kube-audit:kube-audit-test'
+  #kubesec-scan
+- 'Bob Rule: kubesec-scan'
+- 'Bob Task: kubesec-scan:helm-template'
+- 'Bob Task: kubesec-scan:remove-files-not-for-scanning'
+- 'Bob Task: kubesec-scan:kubesec-scan-test'
+
+rules-generate-vulnerability-report-pcr: &rules-generate-vulnerability-report-pcr
+- 'Bob Rule: generate-VA-report-V2'
+- 'Bob Task: generate-VA-report-V2:create-va-folders'
+- 'Bob Task: generate-VA-report-V2:no-upload'
+- 'Bob Task: generate-VA-report-V2:va-report-to-html'
+
+rules-generate-vulnerability-report-pub: &rules-generate-vulnerability-report-pub
+- 'Bob Rule: generate-VA-report-V2'
+- 'Bob Task: generate-VA-report-V2:create-va-folders'
+- 'Bob Task: generate-VA-report-V2:upload'
+- 'Bob Task: generate-VA-report-V2:no-upload'
+
+rules-generate-vulnerability-report-go-pcr: &rules-generate-vulnerability-report-go-pcr
+- 'Bob Rule: generate-VA-report-V2'
+- 'Bob Task: generate-VA-report-V2:no-upload'
+- 'Bob Rule: generate-readable-va-report'
+- 'Bob Task: generate-readable-va-report:generate-readable-va-report'
+
+rules-generate-vulnerability-report-go-pub: &rules-generate-vulnerability-report-go-pub
+- 'Bob Rule: generate-VA-report-V2'
+- 'Bob Task: generate-VA-report-V2:upload'
+- 'Bob Task: generate-VA-report-V2:no-upload'
+- 'Bob Rule: generate-readable-va-report'
+- 'Bob Task: generate-readable-va-report:generate-readable-va-report'
+
+rules-publish-other: &rules-publish-other
+- 'Bob Rule: publish'
+- 'Bob Task: publish:package-helm-public'
+- 'Bob Task: publish:image-pull-internal'
+- 'Bob Task: publish:image-tag-public'
+- 'Bob Task: publish:image-push-public'
+- 'Bob Task: publish:git-tag'
+- 'Bob Task: publish:helm-upload'
+- 'Bob Task: publish:helm-upload-to-release-repo'
+- 'Bob Rule: delete-images-from-agent'
+- 'Bob Task: delete-images-from-agent:delete-internal-image'
+- 'Bob Task: delete-images-from-agent:delete-drop-image'
+
+rules-publish-java: &rules-publish-java
+- 'Bob Rule: upload-mvn-jars'
+- 'Bob Task: upload-mvn-jars:mvn-upload-internal'
+- 'Bob Rule: publish'
+- 'Bob Task: publish:package-helm-public'
+- 'Bob Task: publish:image-pull-internal'
+- 'Bob Task: publish:image-tag-public'
+- 'Bob Task: publish:image-push-public'
+- 'Bob Task: publish:helm-upload'
+- 'Bob Task: publish:helm-upload-to-release-repo'
+- 'Bob Rule: publish-md-oas'
+- 'Bob Task: publish-md-oas:zipping-md-oas'
+- 'Bob Task: publish-md-oas:upload-md-oas'
+- 'Bob Rule: delete-images-from-agent'
+- 'Bob Task: delete-images-from-agent:delete-internal-image'
+- 'Bob Task: delete-images-from-agent:delete-drop-image'
+
+rules-publish-go: &rules-publish-go
+- 'Bob Rule: publish'
+- 'Bob Task: publish:package-helm-public'
+- 'Bob Task: publish:image-pull-internal'
+- 'Bob Task: publish:image-tag-public'
+- 'Bob Task: publish:image-push-public'
+- 'Bob Task: publish:helm-upload'
+- 'Bob Task: publish:helm-upload-to-release-repo'
+- 'Bob Rule: delete-images'
+- 'Bob Task: delete-images:delete-internal-image'
+- 'Bob Task: delete-images:delete-drop-image'
+
+rules-declarative-post-actions: &rules-declarative-post-actions
+- 'Bob Rule: helm-chart-check-report-warnings'
+- 'Bob Task: helm-chart-check-report-warnings:helm-chart-check-report-warnings'
+
+rules-dependencies-validate: &rules-dependencies-validate
+- 'Bob Rule: dependencies-validate'
+- 'Bob Task: dependencies-validate:bypass-esw4'
+- 'Bob Rule: compare-dependencies-files'
+- 'Bob Task: compare-dependencies-files:compare-files'
+
+rules-eridoc-upload-pub: &rules-eridoc-upload-pub
+- 'Bob Rule: eridoc-upload'
+- 'Bob Task: eridoc-upload:doc-to-pdf' 
+- 'Bob Rule: eridoc-upload:eridoc-upload'
+- 'Bob Rule: eridoc-upload:eridoc-approve'
+
+rules-eridoc-upload-pcr: &rules-eridoc-upload-pcr
+- 'Bob Rule: eridoc-upload'
+- 'Bob Task: eridoc-upload:doc-to-pdf'
+- 'Bob Task: eridoc-upload:eridoc-upload-dryrun'
+
+rules-eridoc-upload-go-pcr: &rules-eridoc-upload-go-pcr
+- 'Bob Rule: eridoc-upload'
+- 'Bob Task: eridoc-upload:doc-to-pdf'
+- 'Bob Task: eridoc-upload:dryrun'  
+
+rules-maven-dependency-tree-check: &rules-maven-dependency-tree-check
+- 'Bob Rule: generate-mvn-dep-tree'
+- 'Bob Task: generate-mvn-dep-tree:mvn-dep-tree'
+
+rules-prepare-java: &rules-prepare-java
+- 'Bob Rule: clean'
+- 'Bob Task: clean:rm'
+- 'Bob Task: clean:mvn-clean'
+
+rules-prepare: &rules-prepare
+- 'Bob Rule: clean'
+- 'Bob Task: clean:rm'
+
+rules-generate-contract-test-coverage-report: &rules-generate-contract-test-coverage-report
+- 'Bob Rule: contract-test-coverage'
+- 'Bob Task: contract-test-coverage:generate-report'
+- 'Bob Task: contract-test-coverage:verify-coverage'
+
+rules-create-namespace: &rules-create-namespace
+- 'Bob Rule: create-namespace'
+- 'Bob Rule: namespace-precheck'
+- 'Bob Rule: find-docker-config-basepath'
+- 'Bob Task: find-docker-config-basepath:find-docker-config-basepath'
+- 'Bob Task: namespace-precheck:find-all-namespaces'
+- 'Bob Task: namespace-precheck:delete-namespaces'
+- 'Bob Task: create-namespace:create-namespace'
+
+rules-create-namespace-go: &rules-create-namespace-go
+- 'Bob Rule: expand-helm-template'
+- 'Bob Task: expand-helm-template:helm-template'
+- 'Bob Rule: create-namespace'
+- 'Bob Rule: namespace-precheck'
+- 'Bob Rule: find-docker-config-basepath'
+- 'Bob Task: find-docker-config-basepath:find-docker-config-basepath'
+- 'Bob Task: namespace-precheck:find-all-namespaces'
+- 'Bob Task: namespace-precheck:delete-namespaces'
+- 'Bob Task: create-namespace:create-namespace'
+
+rules-3pp-analysis: &rules-3pp-analysis
+- 'Bob Rule: 3pp-analysis'
+- 'Bob Rule: fossa-analyze'
+- 'Bob Task: fossa-analyze:fossa-analyze'
+- 'Bob Rule: fossa-scan-status-check'
+- 'Bob Task: fossa-scan-status-check:fossa-scan-status-check'
+- 'Bob Rule: fetch-fossa-report-attribution'
+- 'Bob Task: fetch-fossa-report-attribution:fetch-fossa-report-attribution'
+- 'Bob Rule: dependencies-update'
+- 'Bob Task: dependencies-update:update-without-scan-scas'
+- 'Bob Rule: dependencies-update'
+- 'Bob Task: dependencies-update:update-scan-scas'
+- 'Bob Task: dependencies-enrich:enrich'
+
+rules-3pp-analysis-go: &rules-3pp-analysis-go
+- 'Bob Rule: 3pp-analysis'
+- 'Bob Rule: fossa-analyze'
+- 'Bob Task: fossa-analyze:fossa-analyze'
+- 'Bob Rule: fossa-scan-status-check'
+- 'Bob Task: fossa-scan-status-check:fossa-scan-status-check'
+- 'Bob Rule: fetch-fossa-report-attribution'
+- 'Bob Task: fetch-fossa-report-attribution:mkdir'
+- 'Bob Task: fetch-fossa-report-attribution:fetch-fossa-report-attribution'
+- 'Bob Rule: dependencies-update'
+- 'Bob Task: dependencies-update:update-without-scan-scas'
+- 'Bob Rule: dependencies-update'
+- 'Bob Task: dependencies-update:update-scan-scas'
+- 'Bob Task: dependencies-enrich:enrich'
+
+rules-generate-docs: &rules-generate-docs
+- 'Bob Rule: generate-docs'
+- 'Bob Task: generate-docs:asciidoc-to-sdif'
+- 'Bob Task: generate-docs:prepare-for-marketplace'
+
+rules-api-nbc-check: &rules-api-nbc-check
+- 'Bob Rule: rest-2-html'
+- 'Bob Task: rest-2-html:check-if-openapispecfile-present'
+- 'Bob Task: rest-2-html:count-apiversions'
+- 'Bob Task: rest-2-html:check-has-open-api-been-modified'
+- 'Bob Task: rest-2-html:zip-open-api-doc'
+- 'Bob Task: rest-2-html:generate-html-output-files'
+#- 'Bob Rule: rest-2-html:detect-breaking-changes-openapispec'
+
+rules-techdocs-upload-pcr: &rules-techdocs-upload-pcr
+- 'Bob Rule: techdocs-upload-dry-run'
+- 'Bob Task: techdocs-upload-dry-run:retrieve-entity-info'
+- 'Bob Task: techdocs-upload-dry-run:check-connectivity'
+- 'Bob Task: techdocs-upload-dry-run:generate-techdocs'
+
+rules-techdocs-upload-pub: &rules-techdocs-upload-pub
+- 'Bob Rule: techdocs-upload'
+- 'Bob Rule: techdocs-upload-dry-run'
+- 'Bob Task: techdocs-upload-dry-run:retrieve-entity-info'
+- 'Bob Task: techdocs-upload-dry-run:check-connectivity'
+- 'Bob Task: techdocs-upload-dry-run:generate-techdocs'
+- 'Bob Task: techdocs-upload:upload-techdocs'
+
+rules-license-agreement-pcr: &rules-license-agreement-pcr
+- 'Bob Rule: license-agreement-generate'
+- 'Bob Task: license-agreement-generate:license-agreement-generate'
+- 'Bob Rule: license-agreement-validate'
+- 'Bob Task: license-agreement-validate:license-agreement-validate'
+- 'Bob Rule: license-agreement-doc-generate'
+- 'Bob Task: license-agreement-doc-generate:license-agreement-doc-generate'
+- 'Bob Rule: license-agreement-json-upload-dev'
+- 'Bob Task: license-agreement-json-upload-dev:upload-license-agreement-json'
+
+rules-license-agreement-pub: &rules-license-agreement-pub
+- 'Bob Rule: license-agreement-generate'
+- 'Bob Task: license-agreement-generate:license-agreement-generate'
+- 'Bob Rule: license-agreement-validate'
+- 'Bob Task: license-agreement-validate:license-agreement-validate'
+- 'Bob Rule: license-agreement-doc-generate'
+- 'Bob Task: license-agreement-doc-generate:license-agreement-doc-generate'
+- 'Bob Rule: license-agreement-json-upload-drop'
+- 'Bob Task: license-agreement-json-upload-drop:upload-license-agreement-json'
+
+rules-memer-create-version: &rules-memer-create-version
+- 'Bob Rule: init-pre-release-version'
+- 'Bob Task: init-pre-release-version:generate-munin-release-version'
+- 'Bob Rule: munin-update-version'
+- 'Bob Task: munin-update-version:update-cbos-version-in-product-structure'
+- 'Bob Task: munin-update-version:validate-files'
+- 'Bob Task: munin-update-version:generate-documents-yaml'
+- 'Bob Task: munin-update-version:create-products'
+
+rules-memer-release-readiness: &rules-memer-release-readiness
+- 'Bob Rule: munin-release-readiness'
+- 'Bob Task: munin-release-readiness:munin-readiness'
+- 'Bob Rule: munin-release-readiness-success'
+- 'Bob Task: munin-release-readiness-success:munin-readiness-success'
+- 'Bob Rule: munin-release-readiness-failure'
+- 'Bob Task: munin-release-readiness-failure:munin-readiness-failure'
+
+
+stages.standards:
+- appType: java
+  publish:
+
+  - name: Prepare
+    rules: *rules-prepare-java
+
+  - name: Init
+    rules: *rules-init-java-pub
+
+  - name: Lint
+    rules: *rules-lint-java
+
+  - name: Build
+    rules: *rules-build-java
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: API NBC Check
+    rules: *rules-api-nbc-check
+
+  - name: Test
+    rules: *rules-test-java
+
+  - name: Generate Contract Test Coverage Report
+    rules: *rules-generate-contract-test-coverage-report
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: SonarQube
+    rules: *rules-sonarqube-pub
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Maven Dependency Tree Check
+    rules: *rules-maven-dependency-tree-check
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: Dependencies Validate
+    rules: *rules-dependencies-validate
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: License Agreement
+    rules: *rules-license-agreement-pub
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pub
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-java
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Prepare
+    rules: *rules-prepare-java
+
+  - name: Init
+    rules: *rules-init-java-pcr
+
+  - name: Lint
+    rules: *rules-lint-java
+
+  - name: Build
+    rules: *rules-build-java
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: API NBC Check
+    rules: *rules-api-nbc-check
+
+  - name: License Agreement
+    rules: *rules-license-agreement-pcr
+
+  - name: Mimer Create Version
+    rules: *rules-memer-create-version
+
+  - name: Mimer Release Readiness
+    rules: *rules-memer-release-readiness
+
+  - name: Test
+    rules: *rules-test-java
+
+  - name: SonarQube
+    rules: *rules-sonarqube-pcr
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr
+
+  - name: Generate Contract Test Coverage Report
+    rules: *rules-generate-contract-test-coverage-report
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Maven Dependency Tree Check
+    rules: *rules-maven-dependency-tree-check
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: Dependencies Validate
+    rules: *rules-dependencies-validate
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pcr
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+- appType: c++
+  publish:
+
+  - name: Init
+    rules: *rules-init-other-pub
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pub
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-other
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Init
+    rules: *rules-init-other-pcr
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pcr
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+- appType: python
+  publish:
+
+  - name: Init
+    rules: *rules-init-other-pub
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pub
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-other
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Init
+    rules: *rules-init-other-pcr
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+    
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr    
+  
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+- appType: ui
+  publish:
+
+  - name: Init
+    rules: *rules-init-other-pub
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pub
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-other
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Init
+    rules: *rules-init-other-pcr
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr    
+      
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pcr
+
+  - name: Create Namespace
+    rules: *rules-create-namespace
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+- appType: golang
+  publish:
+
+  - name: Init
+    rules: *rules-init-go-pub
+
+  - name: Lint
+    rules: *rules-lint-go
+
+  - name: Build
+    rules: *rules-build-go
+
+  - name: Test
+    rules: *rules-test-go
+
+  - name: SonarQube
+    rules: *rules-sonarqube-pub
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package-go
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis-go
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis-go
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-go-pub
+  
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-go
+
+  - name: Create Namespace
+    rules: *rules-create-namespace-go
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Init
+    rules: *rules-init-go-pcr
+
+  - name: Lint
+    rules: *rules-lint-go
+
+  - name: Build
+    rules: *rules-build-go
+
+  - name: Test
+    rules: *rules-test-go
+
+  - name: SonarQube
+    rules: *rules-sonarqube-pcr
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package-go
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis-go
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis-go
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-go-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-go-pcr
+
+  - name: Create Namespace
+    rules: *rules-create-namespace-go
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+- appType: javascript
+  publish:
+
+  - name: Init
+    rules: *rules-init-other-pub
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+    
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pub
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis    
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pub
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pub
+
+  - name: Publish
+    rules: *rules-publish-other
+
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
+  preCodeReview:
+
+  - name: Init
+    rules: *rules-init-other-pcr
+
+  - name: Lint
+    rules: *rules-lint-other
+
+  # - name: Build
+  #   rules: *rules-build
+
+  # - name: Test
+  #   rules: *rules-test
+
+  # - name: SonarQube
+  #   rules: *rules-sonarqube
+
+  - name: Prepare
+    rules: *rules-prepare
+
+  - name: Image
+    rules: *rules-image
+
+  - name: Package
+    rules: *rules-package
+
+  - name: Generate Docs
+    rules: *rules-generate-docs
+    
+  - name: Techdocs Upload
+    rules: *rules-techdocs-upload-pcr
+
+  - name: 3PP Analysis
+    rules: *rules-3pp-analysis
+
+  - name: K8S Resource Lock
+    rules: *rules-k8s-resource-lock
+
+  - name: Helm Install
+    rules: *rules-helm-install
+
+  - name: Vulnerability Analysis
+    rules: *rules-vulnerability-analysis
+
+  - name: Generate Vulnerability report V2.0
+    rules: *rules-generate-vulnerability-report-pcr
+
+  - name: EriDoc Upload
+    rules: *rules-eridoc-upload-pcr
+    
+  - name: 'Declarative: Post Actions'
+    rules: *rules-declarative-post-actions
